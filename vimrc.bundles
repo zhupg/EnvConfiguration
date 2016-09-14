@@ -16,8 +16,6 @@ Bundle 'christoomey/vim-run-interactive'
 Bundle 'Lokaltog/vim-easymotion'
 " Bundle 'Valloric/YouCompleteMe'
 Bundle 'bronson/vim-trailing-whitespace'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'Shougo/neocomplete'
 
 " vim-scripts repos

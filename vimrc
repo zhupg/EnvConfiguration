@@ -152,7 +152,7 @@ nnoremap <Leader>r :RunInInteractiveShell<space>
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " EasyMotion
 " <Leader>f{char} to move to {char}
