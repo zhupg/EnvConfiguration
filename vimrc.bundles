@@ -1,0 +1,38 @@
+if &compatible
+  set nocompatible
+end
+
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" Define bundles via Github repos
+Bundle 'kien/ctrlp.vim'
+Bundle 'bling/vim-airline'
+Bundle 'christoomey/vim-run-interactive'
+Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'Valloric/YouCompleteMe'
+Bundle 'bronson/vim-trailing-whitespace'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'Shougo/neocomplete'
+
+" vim-scripts repos
+Bundle 'autoload_cscope.vim'
+Bundle 'vcscommand.vim'
+Bundle 'taglist.vim'
+Bundle 'EasyGrep'
+Bundle 'mru.vim'
+Bundle 'The-NERD-Commenter'
+Bundle 'The-NERD-tree'
+Bundle 'YankRing.vim'
+Bundle 'a.vim'
+
+if filereadable(expand("~/.vimrc.bundles.local"))
+  source ~/.vimrc.bundles.local
+endif
+
+filetype on
