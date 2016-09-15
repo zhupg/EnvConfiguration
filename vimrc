@@ -25,7 +25,7 @@ set selectmode=mouse,key
 set nu
 
 " Highlight Search
-set hlsearch 
+set hlsearch
 " Incremental Searching
 set incsearch
 
@@ -40,12 +40,17 @@ set nocompatible
 
 " No backup
 set nobackup
-set nowb
+
+" No swap file
+set noswapfile
 
 " Softtabs, 4 spaces
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set expandtab
+
+" Auto indent
 set autoindent
 set cindent
 
@@ -64,12 +69,14 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Insert mode movement
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <c-h> <left>
+inoremap <c-l> <right>
+
 " Leader
 let mapleader = ","
-
-" Save, Quit
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>
@@ -90,14 +97,14 @@ let Tlist_Process_File_Always=1
 nmap <F8> :Tlist<CR>
 
 " CSCOPE
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 function! AutoLoadCTagsAndCScope()
@@ -106,7 +113,7 @@ function! AutoLoadCTagsAndCScope()
 	let i = 0
 	let break = 0
 	while isdirectory(dir) && i < max
-	if filereadable(dir . 'cscope.out') 
+	if filereadable(dir . 'cscope.out')
 			execute 'cs add ' . dir . 'cscope.out'
 			let break = 1
 		endif
@@ -125,7 +132,7 @@ endf
 nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 
 " egrep
-let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2, 
+let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2,
 let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
 let g:EasyGrepRecursive  = 1 " Recursive searching
 let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
@@ -135,6 +142,20 @@ let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, tags, *.a, *.o"
 set runtimepath^=~/.vim/plugin/ctrlp.vim
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" ToggleList
+let g:lt_location_list_toggle_map = '<leader>l'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+" YankRing
+let g:yankring_replace_n_pkey = '<C-m>'
+
+" undotree
+nnoremap <F2> :UndotreeToggle<cr>
+if has("persistent_undo")
+	set undodir=~/.undodir/
+	set undofile
+endif
 
 " vim-airline plugin
 set laststatus=2
@@ -169,6 +190,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " neocomplete {{{
 let g:neocomplete#data_directory = '~/.vim/tmp/neocomplete'
+let g:acp_enableAtStartup = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 let g:neocomplete#enable_smart_case = 1
@@ -177,33 +199,6 @@ let g:neocomplete#auto_completion_start_length = 2
 " increase limit for tag cache files
 let g:neocomplete#sources#tags#cache_limit_size = 16777216 " 16MB
 
-" fuzzy completion breaks dot-repeat more noticeably
-" https://github.com/Shougo/neocomplete.vim/issues/332
-let g:neocomplete#enable_fuzzy_completion = 0
-
-" always use completions from all buffers
-if !exists('g:neocomplete#same_filetypes')
-let g:neocomplete#same_filetypes = {}
-endif
-let g:neocomplete#same_filetypes._ = '_'
-
-" from neocomplete.txt:
-" ---------------------
-" Plugin key-mappings.
-inoremap <expr> <C-g> neocomplete#undo_completion()
-inoremap <expr> <C-l> neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: cancel popup and insert newline.
-inoremap <silent> <CR> <C-r>=neocomplete#smart_close_popup()<CR><CR>
-" <TAB>: completion.
-inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr> <BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr> <C-y> neocomplete#close_popup()
-inoremap <expr> <C-e> neocomplete#cancel_popup()
-	" }}}
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
