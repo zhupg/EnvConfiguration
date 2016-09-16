@@ -161,7 +161,7 @@ endif
 set laststatus=2
 
 " NERDTree plugin
-let NERDTreeWinPos='right'
+let NERDTreeWinPos='left'
 let NERDChristmasTree=0
 let NERDTreeWinSize=40
 let NERDTreeChDirMode=2
@@ -169,7 +169,10 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', 'cscope*']
 map <F5> :NERDTreeToggle<CR>
 
 " Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
+"nnoremap <Leader>r :RunInInteractiveShell<space>
+
+" Run commands in new split buffer
+nnoremap <Leader>r :ConqueTermSplit bash<CR>
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
