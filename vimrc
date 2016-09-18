@@ -35,7 +35,7 @@ set cursorline
 " Hilight {}
 set showmatch
 
-" Cpmpatible
+" Compatible
 set nocompatible
 
 " No backup
@@ -148,7 +148,7 @@ let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " YankRing
-let g:yankring_replace_n_pkey = '<C-m>'
+let g:yankring_replace_n_pkey = '<leader>n'
 
 " undotree
 nnoremap <F2> :UndotreeToggle<cr>
