@@ -24,6 +24,12 @@ set selectmode=mouse,key
 " Line Number
 set nu
 
+" List
+set nolist
+set listchars=tab:\|\ ,nbsp:%,trail:-
+highlight LeaderTab guifg=#666666
+match LeaderTab /^\t/
+
 " Highlight Search
 set hlsearch
 " Incremental Searching
