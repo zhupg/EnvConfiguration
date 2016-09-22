@@ -3,6 +3,9 @@ set encoding=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fileencodings=utf-8,ucs-bom,chinese
 
+" File format
+set fileformats=unix,dos
+
 " Language
 set langmenu=zh_CN.UTF-8
 
@@ -37,7 +40,7 @@ set incsearch
 
 " Highlight Line
 set cursorline
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine	cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 set cursorcolumn
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
@@ -86,6 +89,12 @@ inoremap <c-l> <right>
 
 " Leader
 let mapleader = ","
+
+" expand tab to space
+map <Leader>ts :%retab!<CR>
+
+" Delete windows ^M
+map <Leader>rm :%s/\r\m//g<CR>
 
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R .<CR>
@@ -141,7 +150,7 @@ endf
 nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 
 " egrep
-let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2,
+let g:EasyGrepMode = 2	   " All:0, Open Buffers:1, TrackExt:2,
 let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
 let g:EasyGrepRecursive  = 1 " Recursive searching
 let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
@@ -149,7 +158,7 @@ let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, tags, *.a, *.o"
 
 " ctrlp
 set runtimepath^=~/.vim/plugin/ctrlp.vim
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip	 " MacOSX/Linux"
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " ToggleList
