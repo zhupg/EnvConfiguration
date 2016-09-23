@@ -60,7 +60,7 @@ set noswapfile
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 
 " Auto indent
 set autoindent
