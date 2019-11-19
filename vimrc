@@ -53,13 +53,16 @@ set nocompatible
 " No backup
 set nobackup
 
+" Backspace
+set backspace=indent,eol,start
+
 " No swap file
 set noswapfile
 
-" Softtabs, 4 spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+" Softtabs, 8 spaces
+set tabstop=8
+set softtabstop=8
+set shiftwidth=8
 set noexpandtab
 
 " Auto indent
@@ -67,7 +70,7 @@ set autoindent
 set cindent
 
 " Make it obvious where 80 characters is
-set textwidth=80
+"set textwidth=80
 set colorcolumn=+1
 
 "Shortcuts Start
