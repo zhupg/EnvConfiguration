@@ -26,6 +26,9 @@ set selectmode=mouse,key
 
 " Line Number
 set nu
+"set rnu
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
 
 " List
 set nolist
@@ -152,6 +155,17 @@ function! AutoLoadCTagsAndCScope()
 endf
 nmap <F7> :call AutoLoadCTagsAndCScope()<CR>
 
+" gtags
+set cscopetag "
+set cscopeprg='gtags-cscope'
+let GtagsCscope_Auto_Load = 1
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Quiet = 1
+let gtags_file=findfile("GTAGS", ";")
+if !empty(gtags_file)
+	exe "cs add" gtags_file
+endif
+
 " egrep
 let g:EasyGrepMode = 2	   " All:0, Open Buffers:1, TrackExt:2,
 let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
@@ -159,10 +173,22 @@ let g:EasyGrepRecursive  = 1 " Recursive searching
 let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
 let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, tags, *.a, *.o"
 
+" Ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+nmap <leader>vv :Ack! "<C-R>""<CR>
+
+" LeaderF
+" open file search window
+let g:Lf_ShortcutF = '<C-P>'
+" open buffer search window
+"let g:Lf_ShortcutB = '<C-B>'
+" auto generate gtags
+let g:Lf_GtagsAutoGenerate = 1
+
 " ctrlp
-set runtimepath^=~/.vim/plugin/ctrlp.vim
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip	 " MacOSX/Linux"
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" set runtimepath^=~/.vim/plugin/ctrlp.vim
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip	 " MacOSX/Linux"
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " ToggleList
 let g:lt_location_list_toggle_map = '<leader>l'
@@ -197,6 +223,7 @@ nnoremap <Leader>r :ConqueTermSplit bash<CR>
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 nmap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " EasyMotion

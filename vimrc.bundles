@@ -10,7 +10,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Define bundles via Github repos
-Bundle 'kien/ctrlp.vim'
+"Bundle 'kien/ctrlp.vim'
+Bundle 'Yggdroot/LeaderF'
 Bundle 'bling/vim-airline'
 Bundle 'christoomey/vim-run-interactive'
 "Bundle 'Lokaltog/vim-easymotion'
@@ -33,6 +34,8 @@ Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'YankRing.vim'
 Bundle 'a.vim'
+Bundle 'easymotion/vim-easymotion'
+Bundle 'gtags.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
