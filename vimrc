@@ -26,9 +26,9 @@ set selectmode=mouse,key
 
 " Line Number
 set nu
-"set rnu
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
+" set rnu
+" autocmd InsertEnter * :set norelativenumber number
+" autocmd InsertLeave * :set relativenumber
 
 " List
 set nolist
@@ -43,9 +43,9 @@ set incsearch
 
 " Highlight Line
 set cursorline
-hi CursorLine	cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorLine	cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue guifg=white
 set cursorcolumn
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue guifg=white
 
 " Hilight {}
 set showmatch
@@ -167,15 +167,17 @@ if !empty(gtags_file)
 endif
 
 " egrep
-let g:EasyGrepMode = 2	   " All:0, Open Buffers:1, TrackExt:2,
-let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
-let g:EasyGrepRecursive  = 1 " Recursive searching
-let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
-let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, tags, *.a, *.o"
+" let g:EasyGrepMode = 2	   " All:0, Open Buffers:1, TrackExt:2,
+" let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
+" let g:EasyGrepRecursive  = 1 " Recursive searching
+" let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
+" let g:EasyGrepFilesToExclude = "*.bak, *~, cscope.*, tags, *.a, *.o"
 
 " Ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
-nmap <leader>vv :Ack! "<C-R>""<CR>
+nmap <leader>a :Ack!<Space>
+nmap <leader>s :Ack!<CR>
+let g:ack_default_options = " -s -H --nocolor --nogroup --column --smart-case --follow"
+let g:ackhighlight = 1
 
 " LeaderF
 " open file search window
@@ -227,17 +229,18 @@ let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 nmap <leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " EasyMotion
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+map f <Plug>(easymotion-prefix)
+map ff <Plug>(easymotion-s)
+map fs <Plug>(easymotion-f)
+map fl <Plug>(easymotion-lineforward
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+map fh <Plug>(easymotion-linebackward)
+map fn <Plug>(easymotion-bd-jk)
+map fw <Plug>(easymotion-bd-w)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+let g:EasyMotion_smartcase = 1
 
 " neocomplete {{{
 let g:neocomplete#data_directory = '~/.vim/tmp/neocomplete'
@@ -250,6 +253,56 @@ let g:neocomplete#auto_completion_start_length = 2
 " increase limit for tag cache files
 let g:neocomplete#sources#tags#cache_limit_size = 16777216 " 16MB
 
+" rainbow
+let g:rainbow_active = 1
+
+let g:rainbow_load_separately = [
+	\ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+	\ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
+	\ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+	\ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+	\ ]
+
+let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+
+" NERDCommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+" gutentags
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" forbid gutentags adding gtags databases
+let g:gutentags_auto_add_gtags_cscope = 1
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles

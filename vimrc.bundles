@@ -32,10 +32,15 @@ Bundle 'EasyGrep'
 Bundle 'mru.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
 Bundle 'a.vim'
 Bundle 'easymotion/vim-easymotion'
-Bundle 'gtags.vim'
+Bundle 'frazrepo/vim-rainbow'
+Bundle 'itchyny/lightline.vim'
+Bundle 'preservim/nerdcommenter'
+"Bundle 'jiangmiao/auto-pairs'
+Bundle 'ludovicchabant/vim-gutentags'
+Bundle 'skywind3000/gutentags_plus'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

@@ -18,4 +18,6 @@ then
 fi
 
 ln -sf $CURDIR/bashrc ~/.bashrc
-ln -sf $CURDIR/tmux.conf ~/.tmux.conf
+ln -sf $CURDIR/zshrc ~/.zshrc
+ln -sf $CURDIR/tmux.conf ~/.tmux.conf.local
+ln -sf ~/.tmux/tmux.conf ~/.tmux.conf
